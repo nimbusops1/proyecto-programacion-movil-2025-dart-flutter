@@ -1,0 +1,109 @@
+#Mi proyecto
+DPL_App/
+│
+├── main.dart
+│   └── MyApp -> MaterialApp -> MainScreen
+│         ├── Botones:
+│         │    ├── Login -> pages/login_page.dart
+│         │    │    └── Formulario: Email, Contraseña + Botón -> HomePage
+│         │    ├── Registro -> pages/register_page.dart
+│         │    │    └── Formulario: Nombre, Email, Contraseña + Botón -> HomePage
+│         │    └── Dashboard directo -> pages/home_page.dart
+│
+├── app.dart
+│   └── MyApp -> MaterialApp -> AdaptiveNavigationScaffold
+│
+├── theme.dart
+│   └── AppTheme.mainTheme
+│         ├── Colores: primary=black, secondary=yellow
+│         ├── AppBarTheme
+│         └── BottomNavigationBarTheme
+│
+├── pages/
+│   ├── home_page.dart
+│   │    ├── HomePage (Stateful)
+│   │    │    ├── AppBar dinámico según _currentIndex
+│   │    │    ├── body -> IndexedStack (mainNavItems)
+│   │    │    │    ├── ProductListPage -> ListView -> ProductCard[]
+│   │    │    │    └── OrdersPage -> ListView -> OrderCard[]
+│   │    │    └── BottomNavigationBar -> mainNavItems
+│   │    │
+│   ├── login_page.dart
+│   │    └── Formulario + Botón -> HomePage
+│   ├── register_page.dart
+│   │    └── Formulario + Botón -> HomePage
+│   ├── orders_page.dart
+│   │    └── ListView -> OrderCard[]
+│   ├── settings_page.dart
+│   │    └── ListView -> SwitchTiles (DarkMode, Notifications, Location, AutoUpdate, Backup)
+│   └── profile_page.dart (opcional)
+│
+├── widgets/
+│   ├── adaptive_scaffold.dart
+│   │    └── AdaptiveNavigationScaffold (Stateful)
+│   │         ├── Pantalla grande: NavigationRail + mainNavItems[_selectedIndex].pageContent
+│   │         └── Pantalla pequeña: BottomNavigationBar + mainNavItems[_selectedIndex].pageContent
+│   └── product_card.dart
+│        └── ProductCard(title, price, icon)
+│
+└── navigation/
+     └── app_nav_items.dart
+           └── List<AppNavItem> mainNavItems
+                 ├── icon
+                 ├── label
+                 └── pageContent (ProductListPage, OrdersPage, ProfilePage, SettingsPage)
+
+
+#Flujo de navegación
+1. main.dart -> MyApp -> MainScreen
+2. MainScreen -> Botones (Login, Registro, Dashboard)
+3. Login/Registro -> Formulario + Botón -> HomePage
+4. HomePage -> AppBar + IndexedStack + BottomNavigationBar
+5. IndexedStack -> mainNavItems (ProductListPage, OrdersPage, ProfilePage, SettingsPage)
+6. AdaptiveNavigationScaffold -> NavigationRail/BottomNavigationBar + mainNavItems[_selectedIndex].pageContent
+
+
+#Diagrama de widgets completo
+MyApp
+  └── MaterialApp
+        └── AdaptiveNavigationScaffold (Stateful)
+              ├── Pantalla grande
+              │    ├── NavigationRail
+              │    └── mainNavItems[_selectedIndex].pageContent
+              └── Pantalla pequeña
+                   ├── BottomNavigationBar
+                   └── mainNavItems[_selectedIndex].pageContent
+        └── AppTheme.mainTheme
+              ├── Colores: primary=black, secondary=yellow
+              ├── AppBarTheme
+              └── BottomNavigationBarTheme
+        └── mainNavItems
+              ├── icon
+              ├── label
+              └── pageContent (ProductListPage, OrdersPage, ProfilePage, SettingsPage)
+        └── ProductCard(title, price, icon)
+        └── OrderCard(orderId, date, total, status)
+        └── SwitchTile(title, value, onChanged)
+              └── SwitchListTile
+        └── Formulario (TextFormField, ElevatedButton)
+        └── LoginPage
+        └── RegisterPage
+        └── HomePage (Stateful)
+              ├── AppBar (dinámico)
+              ├── body
+              ├── IndexedStack
+              │    ├── ProductListPage -> ListView -> ProductCard[]
+              │    └── OrdersPage -> ListView -> OrderCard[]
+              └── BottomNavigationBar -> mainNavItems
+        └── OrdersPage
+              └── ListView -> OrderCard[]
+        └── SettingsPage
+              └── ListView -> SwitchTiles (DarkMode, Notifications, Location, AutoUpdate, Backup)
+        └── ProfilePage (opcional)
+              └── User info + Edit button
+        └── AppNavItem
+              ├── icon
+              ├── label
+              └── pageContent (ProductListPage, OrdersPage, ProfilePage, SettingsPage)
+        
+#Los widget de main.dart son:
