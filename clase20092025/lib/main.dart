@@ -1,3 +1,4 @@
+import 'package:clase20092025/pages/sidebar_page.dart';
 import 'package:flutter/material.dart';
 import 'pages/home_page.dart'; // Tu Dashboard/Home
 import 'pages/login_page.dart';
@@ -38,9 +39,13 @@ class MainScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {},
+        leading: Builder( // aca tuve que agregar builder porque sino me daba error el Drawer().
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () {
+              Scaffold.of(context).openDrawer(); // Aca agregamos el sidebar
+            },
+          ),
         ),
         title: Center(
           child: Text(
@@ -53,6 +58,7 @@ class MainScreen extends StatelessWidget {
           ),
         ),
       ),
+      drawer: const Sidebar(), // Aca se llama a la funcion de sidebar_page.dart
       body: SingleChildScrollView(
         child: Column(
           children: [
