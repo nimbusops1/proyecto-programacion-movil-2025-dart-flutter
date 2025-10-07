@@ -1,0 +1,74 @@
+lib/
+├─ core/                                 # Núcleo del proyecto
+│  ├─ config/                            # Configuración global
+│  │   ├─ app_routes.dart
+│  │   ├─ app_theme.dart
+│  │   └─ firebase_options.dart
+│  ├─ constants/                         # Constantes y textos
+│  │   └─ colors.dart
+│  ├─ errors/                            # Manejo centralizado de errores
+│  │   └─ exceptions.dart
+│  └─ utils/                             # Helpers generales (formatos, validaciones, etc.)
+│      └─ time_formatter.dart
+│
+├─ data/                                 # Capa de acceso a datos
+│  ├─ datasources/
+│  │   ├─ local/                         # Base de datos propia (SQLite o API interna)
+│  │   │   ├─ database_helper.dart
+│  │   │   └─ dao/
+│  │   │       ├─ pedido_dao.dart
+│  │   │       ├─ repartidor_dao.dart
+│  │   │       └─ contador_dao.dart
+│  │   └─ remote/                        # Servicios externos
+│  │       ├─ firebase_auth_service.dart
+│  │       ├─ firebase_push_service.dart
+│  │       └─ firebase_storage_service.dart
+│  │
+│  └─ repositories_impl/                # Implementaciones concretas
+│      ├─ pedido_repository_impl.dart
+│      ├─ auth_repository_impl.dart
+│      └─ contador_repository_impl.dart
+│
+├─ domain/                               # Capa del negocio puro
+│  ├─ entities/                         # Modelos del dominio
+│  │   ├─ pedido.dart
+│  │   ├─ repartidor.dart
+│  │   └─ contador.dart
+│  ├─ repositories/                     # Interfaces abstractas
+│  │   ├─ pedido_repository.dart
+│  │   ├─ auth_repository.dart
+│  │   └─ contador_repository.dart
+│  └─ usecases/                         # Casos de uso
+│      ├─ get_pedidos_dia.dart
+│      ├─ update_estado_pedido.dart
+│      ├─ registrar_entrega_con_foto.dart
+│      ├─ login_with_google.dart
+│      └─ actualizar_contador.dart
+│
+├─ presentation/                         # Capa de presentación (UI y lógica)
+│  ├─ viewmodels/                       # Providers / Bloc / ChangeNotifier
+│  │   ├─ auth_viewmodel.dart
+│  │   ├─ pedido_viewmodel.dart
+│  │   ├─ contador_viewmodel.dart
+│  │   └─ cronometro_viewmodel.dart      # (opcional)
+│  │
+│  └─ views/                            # Pantallas y widgets
+│      ├─ auth/
+│      │   ├─ login_page.dart
+│      │   └─ register_page.dart
+│      ├─ repartidor/                   # Vistas exclusivas del repartidor
+│      │   ├─ dashboard_repartidor.dart
+│      │   ├─ pedidos_page.dart
+│      │   ├─ detalle_pedido_page.dart
+│      │   ├─ registrar_entrega_page.dart
+│      │   └─ cronometro_widget.dart    # (opcional)
+│      ├─ gerente/                      # Vistas exclusivas del gerente
+│      │   ├─ dashboard_gerente.dart
+│      │   ├─ metricas_page.dart
+│      │   └─ repartidores_page.dart
+│      └─ widgets/                      # Componentes reutilizables
+│          ├─ pedido_card.dart
+│          ├─ contador_badge.dart
+│          └─ custom_button.dart
+│
+└─ main.dart                            # Punto de entrada
