@@ -13,8 +13,24 @@ class AppNavItem {
 }
 
 final List<AppNavItem> mainNavItems = [
-  AppNavItem(icon: Icons.home, label: 'Inicio', pageContent: ProductListPage()), // 👈 ahora carga la lista
-  AppNavItem(icon: Icons.local_shipping, label: 'Pedidos', pageContent: OrdersPage()),
-  AppNavItem(icon: Icons.person, label: 'Perfil', pageContent: ProfilePage()),
-  AppNavItem(icon: Icons.settings, label: 'Ajustes', pageContent: SettingsPage()),
+  AppNavItem(
+    icon: Icons.home,
+    label: 'Inicio',
+    pageContent: ProductListPage(), // 👈 ahora carga la lista
+  ),
+  AppNavItem(
+    icon: Icons.local_shipping,
+    label: 'Pedidos',
+    pageContent: OrdersPage(),
+  ),
+  AppNavItem(
+    icon: Icons.person,
+    label: 'Perfil',
+    pageContent: ProfilePage(),
+  ),
+  AppNavItem(
+    icon: Icons.settings,
+    label: 'Ajustes',
+    pageContent: SettingsPage(),
+  ),
 ];

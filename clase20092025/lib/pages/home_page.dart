@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../navigation/app_nav_items.dart'; // Lista con las páginas
+// Importación del Sidebar Privado:
+import '../navigation/sidebar_page.dart';
 
 // --- CLASE PRINCIPAL DEL HOME ---
 class HomePage extends StatefulWidget {
@@ -17,9 +19,27 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.black,
 
+      // --- ASIGNACIÓN DEL DRAWER PRIVADO ---
+      // Usa la clase Sidebar del archivo sidebar_page.dart
+      drawer: const Sidebar(),
+      // ------------------------------------
+
       // AppBar dinámico según la página seleccionada
       appBar: AppBar(
-        backgroundColor: Colors.yellow,
+        backgroundColor: Color(0xFFE89F20),
+
+        // --- BOTÓN DE MENÚ PARA ABRIR EL DRAWER ---
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu),
+            color: Colors.black,
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+          ),
+        ),
+        // -----------------------------------------
+
         title: Text(
           mainNavItems[_currentIndex].label,
           style: const TextStyle(color: Colors.black),
@@ -101,7 +121,7 @@ class ProductCard extends StatelessWidget {
         title: Text(
           title,
           style: const TextStyle(
-            color: Colors.yellow,
+            color: Color(0xFFE89F20),
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),

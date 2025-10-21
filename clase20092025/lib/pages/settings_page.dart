@@ -136,7 +136,7 @@ class _SettingsPageState extends State<SettingsPage> {
         children: [
           const Icon(
             Icons.settings,
-            color: Colors.yellow,
+            color: Color(0xFFE89F20),
             size: 100,
           ),
           const SizedBox(height: 20),
